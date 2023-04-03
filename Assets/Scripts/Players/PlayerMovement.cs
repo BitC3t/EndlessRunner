@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject player;
     public float walkSpeed;
+    public float zMovement;    
 
     // Start is called before the first frame update
     void Start()
@@ -24,5 +25,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A)) {
             transform.position += Vector3.left * walkSpeed * Time.deltaTime;
         }
+
+        transform.position += Vector3.forward * zMovement * Time.deltaTime;
     }
 }
