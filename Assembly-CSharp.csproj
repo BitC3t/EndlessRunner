@@ -36,10 +36,10 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Obstacles\Spawning.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\ObstaclePhysics.cs" />
      <Compile Include="Assets\Scripts\Players\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Players\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\Obstacles\ObstaclePhysics.cs" />
-     <Compile Include="Assets\Scripts\Obstacles\Spawning.cs" />
     <Reference Include="UnityEngine">
         <HintPath>E:\Development\Unity\2021.3.15f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
