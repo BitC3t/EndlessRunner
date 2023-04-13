@@ -44,7 +44,5 @@ public class Spawning : MonoBehaviour
             GameObject gameObject = Instantiate(prefab, pos, layer.transform.rotation);
             timePassed = 0f;
         }
-    }
-
-    
+    }    
 }

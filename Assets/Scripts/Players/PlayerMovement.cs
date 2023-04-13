@@ -1,4 +1,7 @@
 
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System;
@@ -6,6 +9,7 @@ using System.Net.NetworkInformation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
     public float playerHeight;
 
     private GameObject currentLayer;
+    public static String current;
+    public static String nextLayer;
+    public static String previousLayer;
     private int index;
     private List<string> layers = new List<string>() {"GO - L1", "GO - L2", "GO - L3", "GO - L4", "GO - L5", "GO - L6"};
 
@@ -25,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     {
         this.currentLayer = GameObject.Find("GO - L1");
         this.index = 0;
+        current = "GO - L1";
+        previousLayer = "GO - L6";
+        nextLayer = "GO - L2";
     }
 
     // Update is called once per frame
@@ -55,6 +65,8 @@ public class PlayerMovement : MonoBehaviour
         transform.position += Vector3.forward * zMovement * Time.deltaTime;
 
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + zMovement);
+
+        Debug.Log("Current: " + current + ", Next: " + nextLayer + ", Prev: " + previousLayer);
     }
 
     string getNextLayer() {
@@ -64,6 +76,19 @@ public class PlayerMovement : MonoBehaviour
             this.index = 0;
         }
 
+        current = this.layers[this.index];
+        
+        if(this.index - 1 == -1) {
+            previousLayer = this.layers[5];
+        } else {
+            previousLayer = this.layers[this.index - 1];
+        }
+
+        if(this.index + 1 == 6) {
+            nextLayer = this.layers[0];
+        } else {
+            nextLayer = this.layers[this.index + 1];
+        }
         return this.layers[this.index];
     }
 
@@ -71,9 +96,22 @@ public class PlayerMovement : MonoBehaviour
         this.index -= 1;
         
         if(this.index <= -1) {
-            this.index = 0;
+            this.index = 5;
         }
 
+        current = this.layers[this.index];
+
+        if(this.index - 1 == -1) {
+            previousLayer = this.layers[5];
+        } else {
+            previousLayer = this.layers[this.index - 1];
+        }
+
+        if(this.index + 1 == 6) {
+            nextLayer = this.layers[0];
+        } else {
+            nextLayer = this.layers[this.index + 1];
+        }
         return this.layers[this.index];
     }
 

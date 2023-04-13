@@ -13,6 +13,7 @@ public class ObstaclePhysics : MonoBehaviour
     public GameObject planePrefab;
 
     public GameObject prefab;
+    private List<string> layers = new List<string>() {"GO - L1", "GO - L2", "GO - L3", "GO - L4", "GO - L5", "GO - L6"};
     
     // Start is called before the first frame update
     void Start()
@@ -23,10 +24,33 @@ public class ObstaclePhysics : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         if(player.transform.position.z + zOffset >= rb.transform.position.z) {
-            rb.useGravity = true;
+            if(getLayerOfObject(rb)) {
+                rb.useGravity = true;
+            }
         }
+    }
+
+    bool getLayerOfObject(Rigidbody rb) {
+        GameObject currentLayer = GameObject.Find(PlayerMovement.current);
+        GameObject nextLayer = GameObject.Find(PlayerMovement.nextLayer);
+        GameObject previousLayer = GameObject.Find(PlayerMovement.previousLayer);
+
+        
+            if(rb.transform.position.y == currentLayer.transform.position.y) {
+                return false;
+            }
+
+            if(rb.transform.position.y == nextLayer.transform.position.y) {
+                return false;
+            }
+
+            if(rb.transform.position.y == previousLayer.transform.position.y) {
+                return false;
+            }
+
+            return true;
     }
 
     void OnCollisionEnter(Collision collision) {
